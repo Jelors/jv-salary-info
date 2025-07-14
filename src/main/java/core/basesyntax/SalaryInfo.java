@@ -31,20 +31,14 @@ public class SalaryInfo {
                 String datePart = workerName.split(" ")[0];
                 LocalDate lineDate = LocalDate.parse(datePart, formatter);
 
-                if (workerName.contains(name)) {
+                String[] parts = workerName.split(" ");
+                String employeeName = parts[1];
+                if (employeeName.equals(name)) {
                     if ((lineDate.isEqual(dateFromLocal) || lineDate.isAfter(dateFromLocal))
                             && (lineDate.isEqual(dateToLocal) || lineDate.isBefore(dateToLocal))) {
-                        Matcher matcher = numberPattern.matcher(workerName);
-
-                        if (matcher.find()) {
-                            String[] numberStrings = matcher.group(1).split("\\s+");
-                            int product = 1;
-
-                            for (String num : numberStrings) {
-                                product *= Integer.parseInt(num);
-                            }
-                            totalSalary += product;
-                        }
+                        int hours = Integer.parseInt(parts[2]);
+                        int rate = Integer.parseInt(parts[3]);
+                        totalSalary += hours * rate;
                     }
                 }
             }
