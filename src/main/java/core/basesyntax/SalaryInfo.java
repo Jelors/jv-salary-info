@@ -2,16 +2,13 @@ package core.basesyntax;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.regex.Pattern;
 
 public class SalaryInfo {
     public String getSalaryInfo(String[] names, String[] data, String dateFrom, String dateTo) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
         LocalDate dateFromLocal = LocalDate.parse(dateFrom, formatter);
         LocalDate dateToLocal = LocalDate.parse(dateTo, formatter);
-
-        Pattern numberPattern = Pattern.compile("(\\d+(?:\\s+\\d+)+)$");
 
         if (dateFromLocal.isAfter(dateToLocal)) {
             return "Invalid date range";
